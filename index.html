@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Перший сайт Фіцай</title>
+    <link rel="stylesheet" type="text/css" href="./src/styles/style.css">
+
+</head>
+<meta charset="UTF-8">
+
+<body>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ДЕК (Двостороння черга)</title>
+</head>
+<body>
+
+<input type="text" id="commandInput" placeholder="Введіть команду">
+<button onclick="processCommand()">Виконати</button>
+<div id="output"></div>
+
+<script>
+    class Deque {
+        constructor() {
+            this.items = [];
+        }
+
+        push_front(item) {
+            this.items.unshift(item);
+            return "ok";
+        }
+
+        push_back(item) {
+            this.items.push(item);
+            return "ok";
+        }
+
+        pop_front() {
+            if (this.isEmpty()) {
+                return "error";
+            } else {
+                const frontItem = this.items.shift();
+                return frontItem;
+            }
+        }
+
+        pop_back() {
+            if (this.isEmpty()) {
+                return "error";
+            } else {
+                const backItem = this.items.pop();
+                return backItem;
+            }
+        }
+
+        Front() {
+            if (this.isEmpty()) {
+                return "error";
+            } else {
+                return this.items[0];
+            }
+        }
+
+        Back() {
+            if (this.isEmpty()) {
+                return "error";
+            } else {
+                return this.items[this.items.length - 1];
+            }
+        }
+
+        Size() {
+            return this.items.length;
+        }
+
+        Clear() {
+            this.items = [];
+            return "ok";
+        }
+
+        isEmpty() {
+            return this.items.length === 0;
+        }
+    }
+
+    const deque = new Deque();
+    const outputDiv = document.getElementById("output");
+
+    function processCommand() {
+        const commandInput = document.getElementById("commandInput");
+        const command = commandInput.value.trim();
+        const parts = command.split(" ");
+        const operation = parts[0];
+
+        let result = "";
+
+        switch (operation) {
+            case "push_front":
+                const value_front = parts[1];
+                result = deque.push_front(value_front);
+                break;
+
+            case "push_back":
+                const value_back = parts[1];
+                result = deque.push_back(value_back);
+                break;
+
+            case "pop_front":
+                result = deque.pop_front();
+                break;
+
+            case "pop_back":
+                result = deque.pop_back();
+                break;
+
+            case "Front":
+                result = deque.Front();
+                break;
+
+            case "Back":
+                result = deque.Back();
+                break;
+
+            case "Size":
+                result = deque.Size();
+                break;
+
+            case "Clear":
+                result = deque.Clear();
+                break;
+
+            default:
+                result = "Невідома команда";
+        }
+
+        outputDiv.textContent = result;
+        commandInput.value = "";
+    }
+
+</script>
+</body>
+</html>
+
+<input type="text" id="pushValue" placeholder="Введіть значення">
+
+<button onclick="PushOur()">Додати до стеку</button>
+<button onclick="PopOur()">Видалити зі стеку</button>
+<button onclick="SizeOur()">Розмір стеку</button>
+<button onclick="ClearOur()">Очистити стек</button>
+<div id="displayStack"></div>
+<h1 class="main"> Мій перший сайт</h1>
+
+<script>
+    let stack1 = "";
+
+    function PushOur() {
+        const N = 10; // Максимальний розмір стеку
+        if (stack1.split(", ").length - 1 <= N) {
+            const a = document.getElementById("pushValue").value;
+            stack1 = stack1 + ", " + a;
+            console.log(stack1);
+            document.getElementById("displayStack").textContent = stack1;
+        } else {
+            alert("Стек повний");
+        }
+    }
+
+    function PopOur() {
+        if (stack1 !== "") {
+            let tmpStack = "";
+            const poppedElement = stack1.split(", ")[stack1.split(", ").length - 1];
+            for (let i = 0; i < stack1.split(", ").length - 1; i++) {
+                tmpStack += ',' + stack1.split(", ")[i];
+            }
+
+            alert("Видалений елемент: " + poppedElement);
+            stack1 = tmpStack;
+            console.log(stack1);
+            document.getElementById("displayStack").textContent = stack1;
+        } else {
+            alert("Стек порожній");
+        }
+    }
+
+    function SizeOur() {
+        alert("Розмір стеку: " + (stack1.split(', ').length - 1));
+    }
+
+    function ClearOur() {
+        stack1 = "";
+        document.getElementById("displayStack").textContent = stack1;
+        alert("Стек очищено");
+    }
+</script>
+</body>
+</html>
